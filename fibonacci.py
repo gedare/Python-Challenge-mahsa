@@ -26,36 +26,17 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 
-import getopt
+import argparse
 import sys
 from Fib import Fib
 
-
-def usage():
-    print("\
-This program prints the n'th Fibonacci number.\n\
-Usage: fib.py -[hn:]\n\
-  -h --help           print this help\n\
-  -n --number=        the number of the Fibonacci number to print\n")
-
-
 def main():
-    # default values
-    n = 10
+    parser = argparse.ArgumentParser(description='Prints the n\'th Fibonacci number')
+    parser.add_argument('-n', '--number', type=int, default=10, help='the number of the Fibonacci number to print')
+    args = parser.parse_args()
 
-    try:
-        opts, args = getopt.getopt(sys.argv[1:], "hn:", ["help=", "number="])
-    except getopt.GetoptError as err:
-        print(err)
-        usage()
-        sys.exit(2)
-    for opt, arg in opts:
-        if opt in ("-h", "--help"):
-            usage()
-            sys.exit()
-        elif opt in ("-n", "--number"):
-            n = int(arg)
-
+    n = int(args.number)
+    print(n)
     # an instantiation of the Fib object
     fib_object = Fib()
     print(fib_object.fibonacci(n))
