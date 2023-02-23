@@ -27,8 +27,9 @@
 
 
 import argparse
-import sys
-from Fib import Fib
+from FibCount import FibCount
+import time
+
 
 def main():
     parser = argparse.ArgumentParser(description='Prints the n\'th Fibonacci number')
@@ -36,10 +37,13 @@ def main():
     args = parser.parse_args()
 
     n = int(args.number)
-    print(n)
+
     # an instantiation of the Fib object
-    fib_object = Fib()
+    fib_object = FibCount()
+
+    start_time = time.time()
     print(fib_object.fibonacci(n))
+    print("%s seconds" % (time.time() - start_time))
 
 
 if __name__ == '__main__':
