@@ -3,4 +3,10 @@ from Fib import Fib
 
 
 class FibCount(Fib):
-    pass
+    def __init__(self):
+        self.calls = 0
+        pass
+
+    def fibonacci(self, n):
+        self.calls += 1
+        return super().fibonacci(n)

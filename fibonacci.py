@@ -42,7 +42,10 @@ def main():
     fib_object = FibCount()
 
     start_time = time.time()
-    print(fib_object.fibonacci(n))
+
+    print(f"The {n}th Fibonacci number is {fib_object.fibonacci(n)} \n"
+          f" Found by making {fib_object.calls} calls.")
+
     print("%s seconds" % (time.time() - start_time))
 
 
