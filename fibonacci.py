@@ -27,7 +27,7 @@
 
 
 import argparse
-from FibCount import FibCount
+from FibCount import FibCache
 import time
 
 
@@ -39,7 +39,7 @@ def main():
     n = int(args.number)
 
     # an instantiation of the Fib object
-    fib_object = FibCount()
+    fib_object = FibCache()
 
     start_time = time.time()
 
