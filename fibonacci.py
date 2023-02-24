@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: BSD-2-Clause
 """Prints the n'th Fibonacci number"""
 
-# Copyright (C) 2021 Gedare Bloom
+# Copyright (C) 2023 Mahsa Rahimian
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions
@@ -26,42 +26,28 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 
-import getopt
-import sys
-
-
-def usage():
-    print("\
-This program prints the n'th Fibonacci number.\n\
-Usage: fib.py -[hn:]\n\
-  -h --help           print this help\n\
-  -n --number=        the number of the Fibonacci number to print\n")
-
-
-def fibonacci(n):
-  return n if n < 2 else (fibonacci(n-1) + fibonacci(n-2))
+import argparse
+from FibCount import FibCache
+import time
 
 
 def main():
-  # default values
-  n = 10
+    parser = argparse.ArgumentParser(description='Prints the n\'th Fibonacci number')
+    parser.add_argument('-n', '--number', type=int, default=10, help='the number of the Fibonacci number to print')
+    args = parser.parse_args()
 
-  try:
-    opts, args = getopt.getopt(sys.argv[1:], "hn:", ["help=", "number="])
-  except getopt.GetoptError as err:
-    print(err)
-    usage()
-    sys.exit(2)
-  for opt, arg in opts:
-    if opt in ("-h", "--help"):
-      usage()
-      sys.exit()
-    elif opt in ("-n", "--number"):
-      n = int(arg)
+    n = int(args.number)
 
-  print(fibonacci(n))
+    # an instantiation of the Fib object
+    fib_object = FibCache()
+
+    start_time = time.time()
+
+    print(f"The {n}th Fibonacci number is {fib_object.fibonacci(n)} \n"
+          f" Found by making {fib_object.calls} calls.")
+
+    print("%s seconds" % (time.time() - start_time))
 
 
 if __name__ == '__main__':
-  main()
-
+    main()
